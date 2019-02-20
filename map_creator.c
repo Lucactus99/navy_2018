@@ -15,10 +15,10 @@ void create_maps(map_t *maps)
     maps->playertwo_map = fill_maps(maps->playertwo_map);
     maps->playerone_hidden_map = fill_maps(maps->playerone_hidden_map);
     maps->playertwo_hidden_map = fill_maps(maps->playertwo_hidden_map);
-    display_map(maps->playerone_map);
+    /*display_map(maps->playerone_map);
     display_map(maps->playertwo_map);
     display_map(maps->playerone_hidden_map);
-    display_map(maps->playertwo_hidden_map);
+    display_map(maps->playertwo_hidden_map);*/
 }
 
 char **fill_maps(char **map)
@@ -41,6 +41,12 @@ char **fill_maps(char **map)
     map[1][1] = '+';
     for (int i = 2; i < 10; i++)
         map[i][0] = i - 1 + 48;
+    map = add_dots(map);
+    return (map);
+}
+
+char **add_dots(char **map)
+{
     for (int i = 2; i < 10; i++) {
         for (int j = 2; j < 17; j++) {
             if (j % 2 != 0)

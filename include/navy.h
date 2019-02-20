@@ -15,9 +15,16 @@ typedef struct map {
 	char **playertwo_hidden_map;
 } map_t;
 
+typedef struct input {
+	char *playerone_ship_pos;
+	char *playertwo_ship_pos;
+}input_t;
+
+
 void malloc_maps(map_t *);
 char **fill_maps(char **);
 void create_maps(map_t *);
 void display_map(char **);
+char **add_dots(char **);
 
 #endif
