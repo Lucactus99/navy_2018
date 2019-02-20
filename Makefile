@@ -11,6 +11,8 @@ CC      =       gcc
 
 SRC     =   main.c \
 			map_creator.c \
+            my_putstr.c \
+            my_putchar.c
 
 
 OBJ     =       $(SRC:.c=.o)

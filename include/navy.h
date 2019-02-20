@@ -13,6 +13,11 @@ typedef struct map {
 	char **playertwo_map;
 	char **playerone_hidden_map;
 	char **playertwo_hidden_map;
-}map_t;
+} map_t;
+
+void malloc_maps(map_t *);
+char **fill_maps(char **);
+void create_maps(map_t *);
+void display_map(char **);
 
 #endif

@@ -11,7 +11,14 @@
 void create_maps(map_t *maps)
 {
     malloc_maps(maps);
-
+    maps->playerone_map = fill_maps(maps->playerone_map);
+    maps->playertwo_map = fill_maps(maps->playertwo_map);
+    maps->playerone_hidden_map = fill_maps(maps->playerone_hidden_map);
+    maps->playertwo_hidden_map = fill_maps(maps->playertwo_hidden_map);
+    display_map(maps->playerone_map);
+    display_map(maps->playertwo_map);
+    display_map(maps->playerone_hidden_map);
+    display_map(maps->playertwo_hidden_map);
 }
 
 char **fill_maps(char **map)
@@ -46,6 +53,14 @@ char **fill_maps(char **map)
     return (map);
 }
 
+void display_map(char **map)
+{
+    for (int i = 0; map[i] != NULL; i++) {
+        my_putstr(map[i]);
+        my_putchar('\n');
+    }
+}
+
 void malloc_maps(map_t *maps)
 {
     maps->playerone_map = malloc(sizeof(char *) * 11);
@@ -57,10 +72,6 @@ void malloc_maps(map_t *maps)
         maps->playerone_map[i] = malloc(sizeof(char) * 22);
         maps->playertwo_map[i] = malloc(sizeof(char) * 22);
         maps->playerone_hidden_map[i] = malloc(sizeof(char) * 22);
-        maps->playerone_hidden_map[i] = malloc(sizeof(char) * 22);
-    }
-    maps->playerone_map = fill_maps(maps->playerone_map);
-    for (int i = 0; i < 10; i++) {
-        printf("%s\n", maps->playerone_map[i]);
+        maps->playertwo_hidden_map[i] = malloc(sizeof(char) * 22);
     }
 }
