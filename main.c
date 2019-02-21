@@ -16,9 +16,9 @@ int main(int ac, char **av)
 
     create_maps(maps);
     if (ac == 2) {
-        store_ship_coordinate(input, maps, av);
+        store_ship_coordinate(maps, av);
     }
     display_map(maps->playerone_map);
- //   get_playerone_input(input);
+    get_playerone_input(input);
     return (0);
 }

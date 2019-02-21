@@ -32,5 +32,9 @@ void get_playerone_input(input_t *);
 char *get_next_line(int);
 int check_errors(char *);
 void translate_input(char *, input_t *);
+void modify_map_with_ships(int x[], int y[], int, map_t *);
+void horizontal_fill(int x[], int y[], int, map_t *);
+void vertical_fill(int x[], int y[], int, map_t *);
+void store_ship_coordinate(map_t *, char **);
 
 #endif

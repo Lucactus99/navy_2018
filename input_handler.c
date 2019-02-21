@@ -9,7 +9,7 @@
 #include "include/navy.h"
 #include "include/get_next_line.h"
 
-void store_ship_coordinate(input_t *input, map_t *maps, char **av)
+void store_ship_coordinate(map_t *maps, char **av)
 {
     int fd = open(av[1], O_RDONLY);
     char *buffer = malloc(sizeof(char) * 34);
@@ -21,7 +21,7 @@ void store_ship_coordinate(input_t *input, map_t *maps, char **av)
     int length = 0;
 
     read(fd, buffer, 33);
-    for (i; buffer[i] != '\0'; i++) {
+    for (; buffer[i] != '\0'; i++) {
         if (a == 0 && buffer[i] != ':')
             length = buffer[i] - 48;
         if (a == 1 && buffer[i + 1] != ':' && tmp == 0) {
@@ -56,7 +56,7 @@ void horizontal_fill(int x[], int y[], int length, map_t *maps)
 {
     int tmp = x[0];
 
-    for (tmp; tmp <= x[1] + 2; tmp++) {
+    for (; tmp <= x[1] + 2; tmp++) {
         maps->playerone_map[y[0]][tmp] = length + 48;
         tmp++;
     }
@@ -66,7 +66,7 @@ void vertical_fill(int x[], int y[], int length, map_t *maps)
 {
     int tmp = y[0];
 
-    for (tmp; tmp <= y[1]; tmp++)
+    for (; tmp <= y[1]; tmp++)
         maps->playerone_map[tmp][x[0]] = length + 48;
 }
 
