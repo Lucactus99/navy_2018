@@ -7,6 +7,7 @@
 
 #include "include/my.h"
 #include "include/navy.h"
+#include "include/get_next_line.h"
 
 void store_ship_coordinate(input_t *input, char **av)
 {
@@ -36,9 +37,40 @@ void store_ship_coordinate(input_t *input, char **av)
 		if (buffer[i] == ':')
 			a++;
 	}
-	//printf("%d\n", length);
-	printf("%d\n", x[0]);
-	printf("%d\n", y[0]);
-	printf("%d\n", x[1]);
-	printf("%d\n", y[1]);
+}
+
+void get_playerone_input(input_t *input)
+{
+	char *tmp_pos;
+
+	tmp_pos = get_next_line(0);
+
+	if (check_errors(tmp_pos) == 1) {
+		my_putstr("wrong position\n");
+		//faire fonction qui redemande la pos
+	}
+	else if(check_errors(tmp_pos) == 0)
+		translate_input(tmp_pos, input);
+}
+
+void translate_input(char *tmp_pos, input_t *input)
+{
+	for (int i = 0; tmp_pos[i] != 0; i++) {
+		if (tmp_pos[0] > 64 && tmp_pos[0] < 73)
+			input->playerone_x = tmp_pos[0] - 64;
+		if (tmp_pos[1] > 48 && tmp_pos[1] < 57)
+			input->playerone_y = tmp_pos[1] - 48;
+	}
+}
+
+
+int check_errors(char *tmp_pos)
+{
+	if (strlen(tmp_pos) != 2)
+		return (1);
+	if ((tmp_pos[0] > 0 && tmp_pos[0] < 65) || (tmp_pos[0] > 72))
+		return (1);
+	if ((tmp_pos[1] > 0 && tmp_pos[1] < 48) || (tmp_pos[1] > 57))
+		return (1);
+	return (0);
 }

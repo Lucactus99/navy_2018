@@ -18,6 +18,8 @@ typedef struct map {
 typedef struct input {
 	char *playerone_ship_pos;
 	char *playertwo_ship_pos;
+	int playerone_x;
+	int playerone_y;
 }input_t;
 
 
@@ -26,5 +28,9 @@ char **fill_maps(char **);
 void create_maps(map_t *);
 void display_map(char **);
 char **add_dots(char **);
+void get_playerone_input(input_t *);
+char *get_next_line(int);
+int check_errors(char *);
+void translate_input(char *, input_t *);
 
 #endif

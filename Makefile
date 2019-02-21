@@ -14,6 +14,7 @@ SRC     =   main.c \
             my_putstr.c \
             my_putchar.c \
             input_handler.c \
+            get_next_line.c \
 
 
 OBJ     =       $(SRC:.c=.o)
