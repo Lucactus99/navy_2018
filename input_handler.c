@@ -56,7 +56,7 @@ void modify_map_with_ships(int x[], int y[], int length, map_t *maps)
 void horizontal_fill(int x[], int y[], int length, map_t *maps)
 {
     for (int i = x[0] + 4; i < x[1] * 2 + 2; i += 2) {
-        maps->playerone_map[y[0]][i] = length + 48;
+        maps->playerone_map[y[0] + 1][i] = length + 48;
     }
 }
 
@@ -76,6 +76,7 @@ void get_playerone_input(input_t *input)
     if (check_errors(tmp_pos) == 1) {
         my_putstr("wrong position\n");
         //faire fonction qui redemande la pos
+        get_playerone_input(input);
     }
     else if(check_errors(tmp_pos) == 0)
         translate_input(tmp_pos, input);
@@ -90,7 +91,6 @@ void translate_input(char *tmp_pos, input_t *input)
             input->playerone_y = tmp_pos[1] - 48;
     }
 }
-
 
 int check_errors(char *tmp_pos)
 {
