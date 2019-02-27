@@ -46,6 +46,7 @@ void store_ship_coordinate(map_t *maps, char **av)
 
 void modify_map_with_ships(int x[], int y[], int length, map_t *maps)
 {
+    printf("%d %d %d %d\n", x[0], x[1], y[0], y[1]);
     if (y[0] == y[1])
         horizontal_fill(x, y, length, maps);
     if (x[0] == x[1])
@@ -54,20 +55,16 @@ void modify_map_with_ships(int x[], int y[], int length, map_t *maps)
 
 void horizontal_fill(int x[], int y[], int length, map_t *maps)
 {
-    int tmp = x[0];
-
-    for (; tmp <= x[1] + 2; tmp++) {
-        maps->playerone_map[y[0]][tmp] = length + 48;
-        tmp++;
+    for (int i = x[0] + 4; i < x[1] * 2 + 2; i += 2) {
+        maps->playerone_map[y[0]][i] = length + 48;
     }
 }
 
 void vertical_fill(int x[], int y[], int length, map_t *maps)
 {
-    int tmp = y[0];
-
-    for (; tmp <= y[1]; tmp++)
-        maps->playerone_map[tmp][x[0]] = length + 48;
+    for (int i = y[0] + 1; i <= y[1] + 1; i++) {
+        maps->playerone_map[i][x[0] + x[1]] = length + 48;
+    }
 }
 
 void get_playerone_input(input_t *input)
