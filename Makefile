@@ -21,7 +21,7 @@ OBJ     =       $(SRC:.c=.o)
 
 NAME    =       navy
 
-CFLAGS  =       -W -Wextra -Wall -ansi -pedantic -g -std=c99 -I ./include
+CFLAGS  =       -W -Wextra -Wall -pedantic -g -I ./include
 
 all:    $(NAME)
 
