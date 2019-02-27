@@ -37,6 +37,7 @@ int main(int ac, char **av)
 {
     map_t *maps = malloc(sizeof(map_t));
     input_t *input = malloc(sizeof(input_t));
+    int pid = 0;
 
     init_sig();
     if (ac < 2)
@@ -49,7 +50,7 @@ int main(int ac, char **av)
                 usleep(10);
         } else if (ac == 3) {
             printf("my_pid: %d\n", getpid());
-            long pid = strtol(av[1], NULL, 10);
+            pid = my_getnbr(av[1]);
             kill(pid, SIGUSR2);
             while (counter >= 0)
                 usleep(10);

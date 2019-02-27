@@ -9,19 +9,18 @@
 #define NAVY_H_
 
 typedef struct map {
-	char **playerone_map;
-	char **playertwo_map;
-	char **playerone_hidden_map;
-	char **playertwo_hidden_map;
+    char **playerone_map;
+    char **playertwo_map;
+    char **playerone_hidden_map;
+    char **playertwo_hidden_map;
 } map_t;
 
 typedef struct input {
-	char *playerone_ship_pos;
-	char *playertwo_ship_pos;
-	int playerone_x;
-	int playerone_y;
-}input_t;
-
+    char *playerone_ship_pos;
+    char *playertwo_ship_pos;
+    int playerone_x;
+    int playerone_y;
+} input_t;
 
 void malloc_maps(map_t *);
 char **fill_maps(char **);

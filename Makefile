@@ -15,6 +15,7 @@ SRC     =   main.c \
             src/my_putstr.c \
             src/my_putchar.c \
             src/get_next_line.c \
+            src/my_getnbr.c
 
 
 OBJ     =       $(SRC:.c=.o)

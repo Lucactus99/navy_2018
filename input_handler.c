@@ -81,10 +81,8 @@ void get_playerone_input(input_t *input)
     tmp_pos = get_next_line(0);
     if (check_errors(tmp_pos) == 1) {
         my_putstr("wrong position\n");
-        //faire fonction qui redemande la pos
         get_playerone_input(input);
-    }
-    else if(check_errors(tmp_pos) == 0)
+    } else if (check_errors(tmp_pos) == 0)
         translate_input(tmp_pos, input);
 }
 

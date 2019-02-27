@@ -15,10 +15,6 @@ void create_maps(map_t *maps)
     maps->playertwo_map = fill_maps(maps->playertwo_map);
     maps->playerone_hidden_map = fill_maps(maps->playerone_hidden_map);
     maps->playertwo_hidden_map = fill_maps(maps->playertwo_hidden_map);
-    /*display_map(maps->playerone_map);
-    display_map(maps->playertwo_map);
-    display_map(maps->playerone_hidden_map);
-    display_map(maps->playertwo_hidden_map);*/
 }
 
 char **fill_maps(char **map)
@@ -35,7 +31,7 @@ char **fill_maps(char **map)
         }
     }
     for (int j = 0; j < 17; j++)
-            map[1][j] = '-';
+        map[1][j] = '-';
     for (int i = 0; i < 10; i++)
         map[i][1] = '|';
     map[1][1] = '+';
