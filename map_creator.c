@@ -65,6 +65,7 @@ void display_map(char **map)
         my_putstr(map[i]);
         my_putchar('\n');
     }
+    my_putchar('\n');
 }
 
 void malloc_maps(map_t *maps)

@@ -22,5 +22,6 @@
 void my_putchar(char);
 int my_put_nbr(int);
 int my_putstr(char const *);
+int my_strlen(char *);
 
 #endif //MY_H_

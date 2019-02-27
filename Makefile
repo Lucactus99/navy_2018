@@ -11,10 +11,10 @@ CC      =       gcc
 
 SRC     =   main.c \
 			map_creator.c \
-            my_putstr.c \
-            my_putchar.c \
             input_handler.c \
-            get_next_line.c \
+            src/my_putstr.c \
+            src/my_putchar.c \
+            src/get_next_line.c \
 
 
 OBJ     =       $(SRC:.c=.o)

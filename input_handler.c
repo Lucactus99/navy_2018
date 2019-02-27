@@ -46,7 +46,6 @@ void store_ship_coordinate(map_t *maps, char **av)
 
 void modify_map_with_ships(int x[], int y[], int length, map_t *maps)
 {
-    printf("%d %d %d %d\n", x[0], x[1], y[0], y[1]);
     if (y[0] == y[1])
         horizontal_fill(x, y, length, maps);
     if (x[0] == x[1])
@@ -78,8 +77,8 @@ void get_playerone_input(input_t *input)
 {
     char *tmp_pos;
 
+    my_putstr("attack: ");
     tmp_pos = get_next_line(0);
-
     if (check_errors(tmp_pos) == 1) {
         my_putstr("wrong position\n");
         //faire fonction qui redemande la pos
@@ -101,11 +100,11 @@ void translate_input(char *tmp_pos, input_t *input)
 
 int check_errors(char *tmp_pos)
 {
-    if (strlen(tmp_pos) != 2)
+    if (my_strlen(tmp_pos) != 2)
         return (1);
     if ((tmp_pos[0] > 0 && tmp_pos[0] < 65) || (tmp_pos[0] > 72))
         return (1);
-    if ((tmp_pos[1] > 0 && tmp_pos[1] < 48) || (tmp_pos[1] > 57))
+    if ((tmp_pos[1] > 0 && tmp_pos[1] < 49) || (tmp_pos[1] > 56))
         return (1);
     return (0);
 }
