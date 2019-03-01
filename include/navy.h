@@ -44,5 +44,6 @@ char **malloc_2d_file(char *);
 int count_lines_buffer(char *);
 int check_number_of_line(char **, char *);
 int check_error_in_file(char **, char *);
+int check_coords_on_line(char *);
 
 #endif
