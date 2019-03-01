@@ -13,11 +13,11 @@ int counter = 0;
 
 void receive_signal(int sig, siginfo_t *siginfo, void *context)
 {
-    if (sig == 12) {
+    if (sig == SIGUSR2) {
         printf("enemy connected\n\n");
         counter = -1;
         kill(siginfo->si_pid, SIGUSR1);
-    } else if (sig == 10) {
+    } else if (sig == SIGUSR1) {
         printf("successfully connected\n\n");
         counter = -1;
     }
@@ -42,7 +42,7 @@ int main(int ac, char **av)
     init_sig();
     if (ac < 2)
     	return (84);
-    if (ac >= 2 && ac <= 4) {
+    if (ac >= 2 && ac <= 3) {
         if (ac == 2) {
             printf("my_pid: %d\n", getpid());
             printf("waiting for enemy connection...\n\n");
@@ -58,7 +58,7 @@ int main(int ac, char **av)
     	create_maps(maps);
         store_ship_coordinate(maps, av);
     	display_map(maps->playerone_map);
-    	get_playerone_input(input);
+    	get_playerone_input(input, pid);
     }
     return (0);
 }

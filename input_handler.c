@@ -73,7 +73,7 @@ void vertical_fill(int x[], int y[], int length, map_t *maps)
     }
 }
 
-void get_playerone_input(input_t *input)
+void get_playerone_input(input_t *input, int pid)
 {
     char *tmp_pos;
 
@@ -81,12 +81,19 @@ void get_playerone_input(input_t *input)
     tmp_pos = get_next_line(0);
     if (check_errors(tmp_pos) == 1) {
         my_putstr("wrong position\n");
-        get_playerone_input(input);
+        get_playerone_input(input, pid);
     } else if (check_errors(tmp_pos) == 0)
-        translate_input(tmp_pos, input);
+        translate_input(tmp_pos, input, pid);
 }
 
-void translate_input(char *tmp_pos, input_t *input)
+void send_signal(int x, int y, int pid)
+{
+    for (int i = 0; i < x; i++) {
+        kill(pid, SIGUSR2);
+    }
+}
+
+void translate_input(char *tmp_pos, input_t *input, int pid)
 {
     for (int i = 0; tmp_pos[i] != 0; i++) {
         if (tmp_pos[0] > 64 && tmp_pos[0] < 73)
@@ -94,6 +101,7 @@ void translate_input(char *tmp_pos, input_t *input)
         if (tmp_pos[1] > 48 && tmp_pos[1] < 57)
             input->playerone_y = tmp_pos[1] - 48;
     }
+    send_signal(input->playerone_x, input->playerone_y, pid);
 }
 
 int check_errors(char *tmp_pos)
