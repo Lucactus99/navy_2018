@@ -79,7 +79,6 @@ int count_lines_buffer(char *buffer)
         if (buffer[i] == '\n' || buffer[i + 1] == 0)
             tmp++;
     }
-    printf("count lines = %d\n", tmp);
     return (tmp);
 }
 
