@@ -13,6 +13,7 @@ void store_ship_coordinate(map_t *maps, char **av)
 {
     int fd = open(av[1], O_RDONLY);
     char *buffer = malloc(sizeof(char) * 34);
+    char **coord_file;
     int x[2] = {0, 0};
     int y[2] = {0, 0};
     int i = 0;
@@ -21,6 +22,7 @@ void store_ship_coordinate(map_t *maps, char **av)
     int length = 0;
 
     read(fd, buffer, 33);
+    coord_file = malloc_2d_file(buffer);
     for (; buffer[i] != '\0'; i++) {
         if (a == 0 && buffer[i] != ':')
             length = buffer[i] - 48;
@@ -42,6 +44,39 @@ void store_ship_coordinate(map_t *maps, char **av)
             modify_map_with_ships(x, y, length, maps);
         }
     }
+}
+
+char **malloc_2d_file(char *buffer)
+{
+    int lines = count_lines_buffer(buffer);
+    int tmp_lines = 0;
+    int tmp_cols = 0;
+    char **tmp = malloc(sizeof(char *) * lines + 1);
+
+    for (int i = 0; i < lines; i++)
+        tmp[i] = malloc(sizeof(char) * 8);
+    for (int i = 0; buffer[i] != 0; i++) {
+        if (buffer[i] == '\n') {
+            tmp_lines++;
+            tmp_cols = 0;
+        }
+        else {
+            tmp[tmp_lines][tmp_cols] = buffer[i];
+            tmp_cols++;
+        }
+    }
+    return (tmp);
+}
+
+int count_lines_buffer(char *buffer)
+{
+    int tmp = 0;
+
+    for (int i = 0; buffer[i] != 0; i++) {
+        if (buffer[i] == '\n' || buffer[i] == 0)
+            tmp++;
+    }
+    return (tmp);
 }
 
 void modify_map_with_ships(int x[], int y[], int length, map_t *maps)

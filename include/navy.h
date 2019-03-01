@@ -38,5 +38,7 @@ void horizontal_fill(int x[], int y[], int, map_t *);
 void vertical_fill(int x[], int y[], int, map_t *);
 void store_ship_coordinate(map_t *, char **);
 void player_one_main(map_t *, input_t *, char **);
+char **malloc_2d_file(char *buffer);
+int count_lines_buffer(char *buffer);
 
 #endif
