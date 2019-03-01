@@ -8,13 +8,16 @@
 #include "include/my.h"
 #include "include/navy.h"
 
-void create_maps(map_t *maps)
+void create_maps(map_t *maps, int player)
 {
-    malloc_maps(maps);
-    maps->playerone_map = fill_maps(maps->playerone_map);
-    maps->playertwo_map = fill_maps(maps->playertwo_map);
-    maps->playerone_hidden_map = fill_maps(maps->playerone_hidden_map);
-    maps->playertwo_hidden_map = fill_maps(maps->playertwo_hidden_map);
+    malloc_maps(maps, player);
+    if (player == 1) {
+        maps->playerone_map = fill_maps(maps->playerone_map);
+        maps->playertwo_hidden_map = fill_maps(maps->playertwo_hidden_map);
+    } else {
+        maps->playertwo_map = fill_maps(maps->playertwo_map);
+        maps->playerone_hidden_map = fill_maps(maps->playerone_hidden_map);
+    }
 }
 
 char **fill_maps(char **map)
@@ -64,17 +67,21 @@ void display_map(char **map)
     my_putchar('\n');
 }
 
-void malloc_maps(map_t *maps)
+void malloc_maps(map_t *maps, int player)
 {
-    maps->playerone_map = malloc(sizeof(char *) * 11);
-    maps->playertwo_map = malloc(sizeof(char *) * 11);
-    maps->playerone_hidden_map = malloc(sizeof(char *) * 11);
-    maps->playertwo_hidden_map = malloc(sizeof(char *) * 11);
-
-    for (int i = 0; i < 11; i++) {
-        maps->playerone_map[i] = malloc(sizeof(char) * 22);
-        maps->playertwo_map[i] = malloc(sizeof(char) * 22);
-        maps->playerone_hidden_map[i] = malloc(sizeof(char) * 22);
-        maps->playertwo_hidden_map[i] = malloc(sizeof(char) * 22);
+    if (player == 1) {
+        maps->playerone_map = malloc(sizeof(char *) * 11);
+        maps->playertwo_hidden_map = malloc(sizeof(char *) * 11);
+        for (int i = 0; i < 11; i++) {
+            maps->playerone_map[i] = malloc(sizeof(char) * 22);
+            maps->playertwo_hidden_map[i] = malloc(sizeof(char) * 22);  
+        }
+    } else {
+        maps->playertwo_map = malloc(sizeof(char *) * 11);
+        maps->playerone_hidden_map = malloc(sizeof(char *) * 11);
+        for (int i = 0; i < 11; i++) {
+            maps->playertwo_map[i] = malloc(sizeof(char) * 22);
+            maps->playerone_hidden_map[i] = malloc(sizeof(char) * 22);
+        }
     }
 }

@@ -5,9 +5,9 @@
 ** main for navy
 */
 
+#include "include/get_next_line.h"
 #include "include/my.h"
 #include "include/navy.h"
-#include "include/get_next_line.h"
 
 int counter = 0;
 
@@ -41,24 +41,21 @@ int main(int ac, char **av)
 
     init_sig();
     if (ac < 2)
-    	return (84);
+        return (84);
     if (ac >= 2 && ac <= 3) {
         if (ac == 2) {
-            printf("my_pid: %d\n", getpid());
-            printf("waiting for enemy connection...\n\n");
-            while (counter >= 0)
-                usleep(10);
+            player_one_main(maps, input, av);
         } else if (ac == 3) {
             printf("my_pid: %d\n", getpid());
             pid = my_getnbr(av[1]);
             kill(pid, SIGUSR2);
             while (counter >= 0)
                 usleep(10);
+            create_maps(maps, 2);
+            store_ship_coordinate(maps, av);
+            display_map(maps->playerone_map);
+            get_playerone_input(input, pid);
         }
-    	create_maps(maps);
-        store_ship_coordinate(maps, av);
-    	display_map(maps->playerone_map);
-    	get_playerone_input(input, pid);
     }
     return (0);
 }
