@@ -8,6 +8,8 @@
 #ifndef NAVY_H_
 #define NAVY_H_
 
+extern int counter;
+
 typedef struct map {
     char **playerone_map;
     char **playertwo_map;
@@ -22,9 +24,9 @@ typedef struct input {
     int playerone_y;
 } input_t;
 
-void malloc_maps(map_t *);
+void malloc_maps(map_t *, int);
 char **fill_maps(char **);
-void create_maps(map_t *);
+void create_maps(map_t *, int);
 void display_map(char **);
 char **add_dots(char **);
 void get_playerone_input(input_t *, int);
@@ -35,5 +37,6 @@ void modify_map_with_ships(int x[], int y[], int, map_t *);
 void horizontal_fill(int x[], int y[], int, map_t *);
 void vertical_fill(int x[], int y[], int, map_t *);
 void store_ship_coordinate(map_t *, char **);
+void player_one_main(map_t *, input_t *, char **);
 
 #endif
