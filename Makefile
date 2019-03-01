@@ -12,7 +12,7 @@ CC      =       gcc
 SRC     =   main.c \
 			map_creator.c \
             input_handler.c \
-            player_one.c \
+            players.c \
             src/my_putstr.c \
             src/my_putchar.c \
             src/get_next_line.c \

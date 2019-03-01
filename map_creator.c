@@ -8,10 +8,10 @@
 #include "include/my.h"
 #include "include/navy.h"
 
-void create_maps(map_t *maps, int player)
+void create_maps(map_t *maps)
 {
-    malloc_maps(maps, player);
-    if (player == 1) {
+    malloc_maps(maps);
+    if (maps->player == 1) {
         maps->playerone_map = fill_maps(maps->playerone_map);
         maps->playertwo_hidden_map = fill_maps(maps->playertwo_hidden_map);
     } else {
@@ -67,9 +67,9 @@ void display_map(char **map)
     my_putchar('\n');
 }
 
-void malloc_maps(map_t *maps, int player)
+void malloc_maps(map_t *maps)
 {
-    if (player == 1) {
+    if (maps->player == 1) {
         maps->playerone_map = malloc(sizeof(char *) * 11);
         maps->playertwo_hidden_map = malloc(sizeof(char *) * 11);
         for (int i = 0; i < 11; i++) {

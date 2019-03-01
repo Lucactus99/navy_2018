@@ -46,15 +46,7 @@ int main(int ac, char **av)
         if (ac == 2) {
             player_one_main(maps, input, av);
         } else if (ac == 3) {
-            printf("my_pid: %d\n", getpid());
-            pid = my_getnbr(av[1]);
-            kill(pid, SIGUSR2);
-            while (counter >= 0)
-                usleep(10);
-            create_maps(maps, 2);
-            store_ship_coordinate(maps, av);
-            display_map(maps->playerone_map);
-            get_playerone_input(input, pid);
+            player_two_main(maps, input, av);
         }
     }
     return (0);

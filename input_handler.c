@@ -96,7 +96,10 @@ void horizontal_fill(int x[], int y[], int length, map_t *maps)
     else
         i = x[0] + 1;
     for (int j = 0; j < length; j++) {
-        maps->playerone_map[y[0] + 1][i] = length + 48;
+        if (maps->player == 1)
+            maps->playerone_map[y[0] + 1][i] = length + 48;
+        else
+            maps->playertwo_map[y[0] + 1][i] = length + 48;
         i += 2;
     }
 }
@@ -104,7 +107,10 @@ void horizontal_fill(int x[], int y[], int length, map_t *maps)
 void vertical_fill(int x[], int y[], int length, map_t *maps)
 {
     for (int i = y[0] + 1; i <= y[1] + 1; i++) {
-        maps->playerone_map[i][x[0] + x[1]] = length + 48;
+        if (maps->player == 1)
+            maps->playerone_map[i][x[0] + x[1]] = length + 48;
+        else
+            maps->playertwo_map[i][x[0] + x[1]] = length + 48;
     }
 }
 
