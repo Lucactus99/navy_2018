@@ -44,9 +44,11 @@ int main(int ac, char **av)
         return (84);
     if (ac >= 2 && ac <= 3) {
         if (ac == 2) {
-            player_one_main(maps, input, av);
+            if (player_one_main(maps, input, av) == 84)
+                return (84);
         } else if (ac == 3) {
-            player_two_main(maps, input, av);
+            if (player_two_main(maps, input, av) == 84)
+                return (84);
         }
     }
     return (0);

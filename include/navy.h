@@ -37,10 +37,12 @@ void translate_input(char *, input_t *, int);
 void modify_map_with_ships(int x[], int y[], int, map_t *);
 void horizontal_fill(int x[], int y[], int, map_t *);
 void vertical_fill(int x[], int y[], int, map_t *);
-void store_ship_coordinate(map_t *, char **);
-void player_one_main(map_t *, input_t *, char **);
-void player_two_main(map_t *, input_t *, char **);
-char **malloc_2d_file(char *buffer);
-int count_lines_buffer(char *buffer);
+int store_ship_coordinate(map_t *, char **);
+int player_one_main(map_t *, input_t *, char **);
+int player_two_main(map_t *, input_t *, char **);
+char **malloc_2d_file(char *);
+int count_lines_buffer(char *);
+int check_number_of_line(char **, char *);
+int check_error_in_file(char **, char *);
 
 #endif

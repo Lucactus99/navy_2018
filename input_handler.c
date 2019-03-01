@@ -9,7 +9,7 @@
 #include "include/navy.h"
 #include "include/get_next_line.h"
 
-void store_ship_coordinate(map_t *maps, char **av)
+int store_ship_coordinate(map_t *maps, char **av)
 {
     int fd = open(av[1], O_RDONLY);
     char *buffer = malloc(sizeof(char) * 34);
@@ -23,6 +23,8 @@ void store_ship_coordinate(map_t *maps, char **av)
 
     read(fd, buffer, 33);
     coord_file = malloc_2d_file(buffer);
+    if (check_error_in_file(coord_file, buffer) == 1)
+        return (1);
     for (; buffer[i] != '\0'; i++) {
         if (a == 0 && buffer[i] != ':')
             length = buffer[i] - 48;
@@ -44,6 +46,7 @@ void store_ship_coordinate(map_t *maps, char **av)
             modify_map_with_ships(x, y, length, maps);
         }
     }
+    return (0);
 }
 
 char **malloc_2d_file(char *buffer)
@@ -73,9 +76,10 @@ int count_lines_buffer(char *buffer)
     int tmp = 0;
 
     for (int i = 0; buffer[i] != 0; i++) {
-        if (buffer[i] == '\n' || buffer[i] == 0)
+        if (buffer[i] == '\n' || buffer[i + 1] == 0)
             tmp++;
     }
+    printf("count lines = %d\n", tmp);
     return (tmp);
 }
 

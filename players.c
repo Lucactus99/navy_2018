@@ -8,7 +8,7 @@
 #include "my.h"
 #include "navy.h"
 
-void player_one_main(map_t *maps, input_t *input, char **av)
+int player_one_main(map_t *maps, input_t *input, char **av)
 {
     int pid = 0;
     maps->player = 1;
@@ -18,14 +18,16 @@ void player_one_main(map_t *maps, input_t *input, char **av)
     while (counter >= 0)
         usleep(10);
     create_maps(maps);
-    store_ship_coordinate(maps, av);
+    if (store_ship_coordinate(maps, av) == 1)
+        return (84);
     display_map(maps->playerone_map);
     printf("enemy's positions:\n");
     display_map(maps->playertwo_hidden_map);
     // get_playerone_input(input, pid);
+    return (0);
 }
 
-void player_two_main(map_t *maps, input_t *input, char **av)
+int player_two_main(map_t *maps, input_t *input, char **av)
 {
     int pid = 0;
     maps->player = 2;
@@ -36,9 +38,11 @@ void player_two_main(map_t *maps, input_t *input, char **av)
     while (counter >= 0)
         usleep(10);
     create_maps(maps);
-    store_ship_coordinate(maps, av);
+    if (store_ship_coordinate(maps, av) == 1)
+        return (84);
     display_map(maps->playertwo_map);
     printf("enemy's positions:\n");
     display_map(maps->playerone_hidden_map);
     // get_playerone_input(input, pid);
+    return (0);
 }
