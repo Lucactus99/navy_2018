@@ -95,12 +95,8 @@ void modify_map_with_ships(int x[], int y[], int length, map_t *maps)
 
 void horizontal_fill(int x[], int y[], int length, map_t *maps)
 {
-    int i;
+    int i = x[0] + x[0];
 
-    if (x[0] % 2 == 0)
-        i = x[0] + 4;
-    else
-        i = x[0] + 1;
     for (int j = 0; j < length; j++) {
         if (maps->player == 1)
             maps->playerone_map[y[0] + 1][i] = length + 48;
