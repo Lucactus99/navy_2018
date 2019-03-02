@@ -30,6 +30,8 @@ int player_one_main(map_t *maps, input_t *input, char **av)
 int player_two_main(map_t *maps, input_t *input, char **av)
 {
     int pid = 0;
+    int pos1 = 0;
+    int pos2 = 0;
     maps->player = 2;
 
     create_maps(maps);
@@ -45,12 +47,21 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     display_map(maps->playerone_hidden_map);
     counter = 1;
     printf("waiting for enemy's attack...\n");
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 800; i++) {
         usleep(1000);
         if (counter == 1)
             i = 0;
     }
-    printf("%c\n", counter - 1 + 64);
+    pos1 = counter - 1;
+    printf("%c", pos1 + 64);
+    counter = 1;
+    for (int i = 0; i < 800; i++) {
+        usleep(1000);
+        if (counter == 1)
+            i = 0;
+    }
+    pos2 = counter - 1;
+    printf("%d\n", pos2);
     // get_playerone_input(input, pid);
     return (0);
 }

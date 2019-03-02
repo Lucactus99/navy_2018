@@ -5,9 +5,9 @@
 ** handles input for navy
 */
 
+#include "include/get_next_line.h"
 #include "include/my.h"
 #include "include/navy.h"
-#include "include/get_next_line.h"
 
 int store_ship_coordinate(map_t *maps, char **av)
 {
@@ -66,8 +66,7 @@ char **malloc_2d_file(char *buffer)
         if (buffer[i] == '\n') {
             tmp_lines++;
             tmp_cols = 0;
-        }
-        else {
+        } else {
             tmp[tmp_lines][tmp_cols] = buffer[i];
             tmp_cols++;
         }
@@ -137,6 +136,11 @@ void get_playerone_input(input_t *input, int pid)
 void send_signal(int x, int y, int pid)
 {
     for (int i = 0; i < x; i++) {
+        kill(pid, SIGUSR1);
+        usleep(1000);
+    }
+    usleep(1250000);
+    for (int i = 0; i < y; i++) {
         kill(pid, SIGUSR1);
         usleep(1000);
     }
