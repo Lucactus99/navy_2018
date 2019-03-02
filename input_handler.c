@@ -156,14 +156,3 @@ void translate_input(char *tmp_pos, input_t *input, int pid)
     }
     send_signal(input->playerone_x, input->playerone_y, pid);
 }
-
-int check_errors(char *tmp_pos)
-{
-    if (my_strlen(tmp_pos) != 2)
-        return (1);
-    if ((tmp_pos[0] > 0 && tmp_pos[0] < 65) || (tmp_pos[0] > 72))
-        return (1);
-    if ((tmp_pos[1] > 0 && tmp_pos[1] < 49) || (tmp_pos[1] > 56))
-        return (1);
-    return (0);
-}

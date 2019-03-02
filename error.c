@@ -54,3 +54,14 @@ int check_number_of_line(char **coord_file, char *buffer)
     }
     return (0);
 }
+
+int check_errors(char *tmp_pos)
+{
+    if (my_strlen(tmp_pos) != 2)
+        return (1);
+    if ((tmp_pos[0] > 0 && tmp_pos[0] < 65) || (tmp_pos[0] > 72))
+        return (1);
+    if ((tmp_pos[1] > 0 && tmp_pos[1] < 49) || (tmp_pos[1] > 56))
+        return (1);
+    return (0);
+}

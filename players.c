@@ -62,6 +62,25 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     }
     pos2 = counter - 1;
     printf("%d\n", pos2);
+    if (check_receive_input(pos1, pos2, maps))
+        printf("hit\n");
+    else
+        printf("missed\n");
+    
     // get_playerone_input(input, pid);
+    return (0);
+}
+
+int check_receive_input(int x, int y, map_t *maps)
+{
+    x = x + x;
+    y = y + 1;
+    if (maps->player == 1) {
+        if (maps->playerone_map[y][x] != '.')
+            return (1);
+    } else {
+        if (maps->playertwo_map[y][x] != '.')
+            return (1);
+    }
     return (0);
 }
