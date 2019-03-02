@@ -13,13 +13,13 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     int pid = 0;
     maps->player = 1;
 
+    create_maps(maps);
+    if (store_ship_coordinate(maps, av) == 1)
+        return (84);
     printf("my_pid: %d\n", getpid());
     printf("waiting for enemy connection...\n\n");
     while (counter >= 0)
         usleep(10);
-    create_maps(maps);
-    if (store_ship_coordinate(maps, av) == 1)
-        return (84);
     display_map(maps->playerone_map);
     printf("enemy's positions:\n");
     display_map(maps->playertwo_hidden_map);
@@ -32,14 +32,14 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     int pid = 0;
     maps->player = 2;
 
+    create_maps(maps);
+    if (store_ship_coordinate(maps, av) == 1)
+        return (84);
     printf("my_pid: %d\n", getpid());
     pid = my_getnbr(av[1]);
     kill(pid, SIGUSR2);
     while (counter >= 0)
         usleep(10);
-    create_maps(maps);
-    if (store_ship_coordinate(maps, av) == 1)
-        return (84);
     display_map(maps->playertwo_map);
     printf("enemy's positions:\n");
     display_map(maps->playerone_hidden_map);
