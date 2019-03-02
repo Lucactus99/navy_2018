@@ -14,7 +14,7 @@ int check_error_in_file(char **coord_file, char *buffer)
         return (1);
     for (int i = 0; coord_file[i] != NULL; i++)
         if (check_coords_on_line(coord_file[i]) == 1) {
-            printf("error in file\n");
+            my_putstr("error in file\n");
             return (1);
         }
     return (0);
@@ -42,12 +42,12 @@ int check_number_of_line(char **coord_file, char *buffer)
     char tmp = '2';
 
     if (count_lines_buffer(buffer) != 4) {
-        printf("error number of line\n");
+        my_putstr("error number of line\n");
         return (1);
     }
     for (int i = 0; i < count_lines_buffer(buffer); i++) {
         if (coord_file[i][0] != tmp) {
-            printf("error in first char\n");
+            my_putstr("error in first char\n");
             return (1);
         }
         tmp++;

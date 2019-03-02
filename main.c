@@ -14,12 +14,12 @@ int counter = 0;
 void receive_signal(int sig, siginfo_t *siginfo, void *context)
 {
     if (sig == SIGUSR2) {
-        printf("enemy connected\n\n");
+        my_putstr("enemy connected\n\n");
         counter = -1 * (siginfo->si_pid);
         kill(siginfo->si_pid, SIGUSR1);
     } else if (sig == SIGUSR1) {
         if (counter == 0) {
-            printf("successfully connected\n\n");
+            my_putstr("successfully connected\n\n");
             counter = -1;
         } else {
             counter++;
@@ -49,10 +49,10 @@ int main(int ac, char **av)
     if (ac == 2 || ac == 3) {
         if (ac == 2) {
             if (av[1][0] == '-' && av[1][1] == 'h') {
-                printf("USAGE\n\t./navy [first_player_pid] navy_positions\n");
-                printf("DESCRIPTION\n\tfirst_player_pid: only for the 2nd");
-                printf(" player. pid of the first player.\n\tnavy_positions:");
-                printf(" file representing the positions of the ships.\n");
+                my_putstr("USAGE\n\t./navy [first_player_pid] navy_positions\n");
+                my_putstr("DESCRIPTION\n\tfirst_player_pid: only for the 2nd");
+                my_putstr(" player. pid of the first player.\n\tnavy_positions:");
+                my_putstr(" file representing the positions of the ships.\n");
                 return (0);
             }
             if (player_one_main(maps, input, av) == 84)
