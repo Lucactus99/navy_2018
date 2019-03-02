@@ -42,7 +42,18 @@ int player_one_main(map_t *maps, input_t *input, char **av)
         my_putchar(input->playerone_y + 48);
         my_putstr(": missed\n");
     }
+    maps->playertwo_hidden_map = modify_hidden_map(maps->playertwo_hidden_map, input);
+    display_map(maps->playertwo_hidden_map);
     return (0);
+}
+
+char **modify_hidden_map(char **map, input_t *input)
+{
+    if (counter == 3)
+        map[input->playerone_y + 1][input->playerone_x * 2] = 'x';
+    else
+        map[input->playerone_y + 1][input->playerone_x * 2] = 'o';
+    return (map);
 }
 
 int player_two_main(map_t *maps, input_t *input, char **av)
