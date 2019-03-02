@@ -11,7 +11,7 @@
 
 int store_ship_coordinate(map_t *maps, char **av)
 {
-    int fd = open(av[1], O_RDONLY);
+    int fd;
     char *buffer = malloc(sizeof(char) * 34);
     char **coord_file;
     int x[2] = {0, 0};
@@ -21,6 +21,10 @@ int store_ship_coordinate(map_t *maps, char **av)
     int tmp = 0;
     int length = 0;
 
+    if (maps->player == 2)
+        fd = open(av[2], O_RDONLY);
+    else
+        fd = open(av[1], O_RDONLY);
     read(fd, buffer, 33);
     coord_file = malloc_2d_file(buffer);
     if (check_error_in_file(coord_file, buffer) == 1)
@@ -133,7 +137,8 @@ void get_playerone_input(input_t *input, int pid)
 void send_signal(int x, int y, int pid)
 {
     for (int i = 0; i < x; i++) {
-        kill(pid, SIGUSR2);
+        kill(pid, SIGUSR1);
+        usleep(1000);
     }
 }
 

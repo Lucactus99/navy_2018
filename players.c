@@ -23,7 +23,7 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     display_map(maps->playerone_map);
     printf("enemy's positions:\n");
     display_map(maps->playertwo_hidden_map);
-    // get_playerone_input(input, pid);
+    get_playerone_input(input, counter);
     return (0);
 }
 
@@ -33,7 +33,7 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     maps->player = 2;
 
     printf("my_pid: %d\n", getpid());
-    pid = my_getnbr(av[2]);
+    pid = my_getnbr(av[1]);
     kill(pid, SIGUSR2);
     while (counter >= 0)
         usleep(10);
@@ -43,6 +43,13 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     display_map(maps->playertwo_map);
     printf("enemy's positions:\n");
     display_map(maps->playerone_hidden_map);
+    counter = 1;
+    for (int i = 0; i < 1000; i++) {
+        usleep(1000);
+        if (counter == 1)
+            i = 0;
+    }
+    printf("%c\n", counter - 1 + 64);
     // get_playerone_input(input, pid);
     return (0);
 }

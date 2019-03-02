@@ -15,11 +15,15 @@ void receive_signal(int sig, siginfo_t *siginfo, void *context)
 {
     if (sig == SIGUSR2) {
         printf("enemy connected\n\n");
-        counter = -1;
+        counter = -1 * (siginfo->si_pid);
         kill(siginfo->si_pid, SIGUSR1);
     } else if (sig == SIGUSR1) {
-        printf("successfully connected\n\n");
-        counter = -1;
+        if (counter == 0) {
+            printf("successfully connected\n\n");
+            counter = -1;
+        } else {
+            counter++;
+        }
     }
 }
 
