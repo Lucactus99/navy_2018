@@ -72,7 +72,7 @@ void malloc_maps(map_t *maps)
     maps->playerone_hidden_map = malloc(sizeof(char *) * 11);
     for (int i = 0; i < 11; i++) {
         maps->playerone_map[i] = malloc(sizeof(char) * 22);
-        maps->playertwo_hidden_map[i] = malloc(sizeof(char) * 22);  
+        maps->playertwo_hidden_map[i] = malloc(sizeof(char) * 22);
         maps->playertwo_map[i] = malloc(sizeof(char) * 22);
         maps->playerone_hidden_map[i] = malloc(sizeof(char) * 22);
     }

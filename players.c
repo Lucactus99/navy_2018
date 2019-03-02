@@ -16,14 +16,32 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     create_maps(maps);
     if (store_ship_coordinate(maps, av) == 1)
         return (84);
-    printf("my_pid: %d\n", getpid());
-    printf("waiting for enemy connection...\n\n");
+    my_putstr("my_pid: ");
+    my_put_nbr(getpid());
+    my_putchar('\n');
+    my_putstr("waiting for enemy connection...\n\n");
     while (counter >= 0)
         usleep(10);
     display_map(maps->playerone_map);
-    printf("enemy's positions:\n");
+    my_putstr("enemy's positions:\n");
     display_map(maps->playertwo_hidden_map);
     get_playerone_input(input, counter);
+    counter = 1;
+    for (int i = 0; i < 800; i++) {
+        usleep(1000);
+        if (counter == 1)
+            i = 0;
+    }
+    if (counter == 3) {
+        my_putchar(input->playerone_x + 64);
+        my_putchar(input->playerone_y + 48);
+        my_putstr(": hit\n");
+    }
+    else {
+        my_putchar(input->playerone_x + 64);
+        my_putchar(input->playerone_y + 48);
+        my_putstr(": missed\n");
+    }
     return (0);
 }
 
@@ -37,23 +55,24 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     create_maps(maps);
     if (store_ship_coordinate(maps, av) == 1)
         return (84);
-    printf("my_pid: %d\n", getpid());
+    my_putstr("my_pid: ");
+    my_put_nbr(getpid());
+    my_putchar('\n');
     pid = my_getnbr(av[1]);
     kill(pid, SIGUSR2);
     while (counter >= 0)
         usleep(10);
     display_map(maps->playertwo_map);
-    printf("enemy's positions:\n");
+    my_putstr("enemy's positions:\n");
     display_map(maps->playerone_hidden_map);
     counter = 1;
-    printf("waiting for enemy's attack...\n");
+    my_putstr("waiting for enemy's attack...\n");
     for (int i = 0; i < 800; i++) {
         usleep(1000);
         if (counter == 1)
             i = 0;
     }
     pos1 = counter - 1;
-    printf("%c", pos1 + 64);
     counter = 1;
     for (int i = 0; i < 800; i++) {
         usleep(1000);
@@ -61,14 +80,25 @@ int player_two_main(map_t *maps, input_t *input, char **av)
             i = 0;
     }
     pos2 = counter - 1;
-    printf("%d\n", pos2);
     if (check_receive_input(pos1, pos2, maps))
-        printf("hit\n");
+        send_hit_signal(pid);
     else
-        printf("missed\n");
-    
+        send_miss_signal(pid);
     // get_playerone_input(input, pid);
     return (0);
+}
+
+void send_hit_signal(int pid)
+{
+    kill(pid, SIGUSR2);
+    usleep(1000);
+    kill(pid, SIGUSR2);
+}
+
+void send_miss_signal(int pid)
+{
+    kill(pid, SIGUSR2);
+    usleep(1000);
 }
 
 int check_receive_input(int x, int y, map_t *maps)

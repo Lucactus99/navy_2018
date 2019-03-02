@@ -17,6 +17,7 @@ SRC     =   main.c \
             src/my_putchar.c \
             src/get_next_line.c \
             src/my_getnbr.c \
+            src/my_put_nbr.c \
             error.c \
 
 
