@@ -46,8 +46,15 @@ int main(int ac, char **av)
     init_sig();
     if (ac < 2)
         return (84);
-    if (ac >= 2 && ac <= 3) {
+    if (ac == 2 || ac == 3) {
         if (ac == 2) {
+            if (av[1][0] == '-' && av[1][1] == 'h') {
+                printf("USAGE\n\t./navy [first_player_pid] navy_positions\n");
+                printf("DESCRIPTION\n\tfirst_player_pid: only for the 2nd");
+                printf(" player. pid of the first player.\n\tnavy_positions:");
+                printf(" file representing the positions of the ships.\n");
+                return (0);
+            }
             if (player_one_main(maps, input, av) == 84)
                 return (84);
         } else if (ac == 3) {
