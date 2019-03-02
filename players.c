@@ -43,7 +43,6 @@ int player_one_main(map_t *maps, input_t *input, char **av)
         my_putstr(": missed\n");
     }
     maps->playertwo_hidden_map = modify_hidden_map(maps->playertwo_hidden_map, input);
-    display_map(maps->playertwo_hidden_map);
     return (0);
 }
 
