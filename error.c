@@ -22,8 +22,16 @@ int check_error_in_file(char **coord_file, char *buffer)
 
 int check_coords_on_line(char *coord_file)
 {
+    static int nbr = 2;
+
     if (my_strlen(coord_file) != 7)
         return (1);
+    if (coord_file[0] != nbr + 48) {
+        printf("%c %c", coord_file[0], nbr - 48);
+        return (1);
+    }
+    else
+        nbr++;
     if (coord_file[1] != ':' || coord_file[4] != ':')
         return (1);
     if ((coord_file[2] > 0 && coord_file[2] < 65) || (coord_file[2] > 72))
