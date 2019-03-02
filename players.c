@@ -10,7 +10,8 @@
 
 int player_one_main(map_t *maps, input_t *input, char **av)
 {
-    int pid = 0;
+    int pos1 = 0;
+    int pos2 = 0;
     maps->player = 1;
 
     create_maps(maps);
@@ -25,7 +26,8 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     display_map(maps->playerone_map);
     my_putstr("enemy's positions:\n");
     display_map(maps->playertwo_hidden_map);
-    get_playerone_input(input, counter);
+    input->playertwo_pid = counter * (-1);
+    get_player_input(input, input->playertwo_pid, maps);
     counter = 1;
     for (int i = 0; i < 800; i++) {
         usleep(1000);
@@ -35,14 +37,33 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     if (counter == 3) {
         my_putchar(input->playerone_x + 64);
         my_putchar(input->playerone_y + 48);
-        my_putstr(": hit\n");
+        my_putstr(": hit\n\n");
     }
     else {
         my_putchar(input->playerone_x + 64);
         my_putchar(input->playerone_y + 48);
-        my_putstr(": missed\n");
+        my_putstr(": missed\n\n");
     }
     maps->playertwo_hidden_map = modify_hidden_map(maps->playertwo_hidden_map, input);
+    counter = 1;
+    my_putstr("waiting for enemy's attack...\n");
+    for (int i = 0; i < 800; i++) {
+        usleep(1000);
+        if (counter == 1)
+            i = 0;
+    }
+    pos1 = counter - 1;
+    counter = 1;
+    for (int i = 0; i < 800; i++) {
+        usleep(1000);
+        if (counter == 1)
+            i = 0;
+    }
+    pos2 = counter - 1;
+    printf("%c%d\n", pos1 + 64, pos2);
+    display_map(maps->playerone_map);
+    my_putstr("enemy's positions:\n");
+    display_map(maps->playertwo_hidden_map);
     return (0);
 }
 
@@ -57,7 +78,6 @@ char **modify_hidden_map(char **map, input_t *input)
 
 int player_two_main(map_t *maps, input_t *input, char **av)
 {
-    int pid = 0;
     int pos1 = 0;
     int pos2 = 0;
     maps->player = 2;
@@ -68,8 +88,8 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     my_putstr("my_pid: ");
     my_put_nbr(getpid());
     my_putchar('\n');
-    pid = my_getnbr(av[1]);
-    kill(pid, SIGUSR2);
+    input->playerone_pid = my_getnbr(av[1]);
+    kill(input->playerone_pid, SIGUSR2);
     while (counter >= 0)
         usleep(10);
     display_map(maps->playertwo_map);
@@ -90,11 +110,27 @@ int player_two_main(map_t *maps, input_t *input, char **av)
             i = 0;
     }
     pos2 = counter - 1;
-    if (check_receive_input(pos1, pos2, maps))
-        send_hit_signal(pid);
-    else
-        send_miss_signal(pid);
-    // get_playerone_input(input, pid);
+    if (check_receive_input(pos1, pos2, maps)) {
+        send_hit_signal(input->playerone_pid);
+        my_putchar(pos1 + 64);
+        my_putchar(pos2 + 48);
+        my_putstr(": hit\n\n");
+    } else {
+        send_miss_signal(input->playerone_pid);
+        my_putchar(pos1 + 64);
+        my_putchar(pos2 + 48);
+        my_putstr(": missed\n\n");
+    }
+    get_player_input(input, input->playerone_pid, maps);
+    counter = 1;
+    for (int i = 0; i < 800; i++) {
+        usleep(1000);
+        if (counter == 1)
+            i = 0;
+    }
+    display_map(maps->playertwo_map);
+    my_putstr("enemy's positions:\n");
+    display_map(maps->playerone_hidden_map);
     return (0);
 }
 

@@ -23,6 +23,10 @@ typedef struct input {
     char *playertwo_ship_pos;
     int playerone_x;
     int playerone_y;
+    int playertwo_x;
+    int playertwo_y;
+    int playerone_pid;
+    int playertwo_pid;
 } input_t;
 
 void malloc_maps(map_t *);
@@ -30,10 +34,10 @@ char **fill_maps(char **);
 void create_maps(map_t *);
 void display_map(char **);
 char **add_dots(char **);
-void get_playerone_input(input_t *, int);
+void get_player_input(input_t *, int, map_t *);
 char *get_next_line(int);
 int check_errors(char *);
-void translate_input(char *, input_t *, int);
+void translate_input(char *, input_t *, int , map_t *);
 void modify_map_with_ships(int x[], int y[], int, map_t *);
 void horizontal_fill(int x[], int y[], int, map_t *);
 void vertical_fill(int x[], int y[], int, map_t *);
@@ -45,6 +49,9 @@ int count_lines_buffer(char *);
 int check_number_of_line(char **, char *);
 int check_error_in_file(char **, char *);
 int check_coords_on_line(char *);
-char **modify_hidden_map(char **, input_t *input);
+char **modify_hidden_map(char **, input_t *);
+void send_hit_signal(int);
+void send_miss_signal(int);
+int check_receive_input(int, int, map_t *);
 
 #endif
