@@ -44,6 +44,7 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     printf("enemy's positions:\n");
     display_map(maps->playerone_hidden_map);
     counter = 1;
+    printf("waiting for enemy's attack...\n");
     for (int i = 0; i < 1000; i++) {
         usleep(1000);
         if (counter == 1)
