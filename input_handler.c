@@ -39,9 +39,11 @@ void horizontal_fill(map_t *maps)
 
     for (int j = 0; j < maps->boat_length; j++) {
         if (maps->player == 1)
-            maps->playerone_map[maps->y_init[0] + 1][i] = maps->boat_length + 48;
+            maps->playerone_map[maps->y_init[0] + 1][i] =
+            maps->boat_length + 48;
         else
-            maps->playertwo_map[maps->y_init[0] + 1][i] = maps->boat_length + 48;
+            maps->playertwo_map[maps->y_init[0] + 1][i] =
+            maps->boat_length + 48;
         i += 2;
     }
 }
@@ -50,9 +52,10 @@ void vertical_fill(map_t *maps)
 {
     for (int i = maps->y_init[0] + 1; i <= maps->y_init[1] + 1; i++) {
         if (maps->player == 1)
-            maps->playerone_map[i][maps->x_init[0] + maps->x_init[1]] = maps->boat_length + 48;
+            maps->playerone_map[i][maps->x_init[0] + maps->x_init[1]] =
+            maps->boat_length + 48;
         else
-            maps->playertwo_map[i][maps->x_init[0] + maps->x_init[1]] = maps->boat_length + 48;
+            maps->playertwo_map[i][maps->x_init[0] + maps->x_init[1]] =
+            maps->boat_length + 48;
     }
 }
-

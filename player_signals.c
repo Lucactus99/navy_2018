@@ -65,7 +65,9 @@ void translate_input(char *tmp_pos, input_t *input, int pid, map_t *maps)
         }
     }
     if (maps->player == 1)
-        send_signal_one(input->playerone_x, input->playerone_y, input->playertwo_pid, maps);
+        send_signal_one(input->playerone_x,
+        input->playerone_y, input->playertwo_pid, maps);
     else
-        send_signal_two(input->playertwo_x, input->playertwo_y, input->playerone_pid, maps);
+        send_signal_two(input->playertwo_x,
+        input->playertwo_y, input->playerone_pid, maps);
 }
