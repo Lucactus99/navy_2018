@@ -90,10 +90,11 @@ void player_attack(map_t *maps, input_t *input)
         get_player_input(input, input->playerone_pid, maps);
     my_sleep();
     display_attack(maps, input);
-    if (maps->player == 1)
-        maps->playertwo_hidden_map = modify_map(
-            maps->playertwo_hidden_map, input->playerone_x, input->playerone_y);
-    else
-        maps->playerone_hidden_map = modify_map(
-            maps->playerone_hidden_map, input->playertwo_x, input->playertwo_y);
+    if (maps->player == 1) {
+        maps->playertwo_hidden_map = modify_map(maps->playertwo_hidden_map,
+        input->playerone_x, input->playerone_y);
+    } else {
+        maps->playerone_hidden_map = modify_map(maps->playerone_hidden_map,
+        input->playertwo_x, input->playertwo_y);
+    }
 }

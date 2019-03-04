@@ -20,7 +20,8 @@ SRC     =   main.c \
             src/my_getnbr.c \
             src/my_put_nbr.c \
             error.c \
-            player_signals.c \
+            players_signal.c \
+            map_modify.c \
             stock_txt.c \
 
 

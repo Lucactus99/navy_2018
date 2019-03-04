@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** player_signal.c
+** players_signal.c
 ** File description:
 ** get player input and sends signals
 */
@@ -48,26 +48,31 @@ void send_signal_two(int x, int y, int pid)
     }
 }
 
+void translate_input_condition(char *tmp_pos, input_t *input, map_t *maps)
+{
+    if (tmp_pos[0] > 64 && tmp_pos[0] < 73) {
+        if (maps->player == 1)
+            input->playerone_x = tmp_pos[0] - 64;
+        else
+            input->playertwo_x = tmp_pos[0] - 64;
+    }
+    if (tmp_pos[1] > 48 && tmp_pos[1] < 57) {
+        if (maps->player == 1)
+            input->playerone_y = tmp_pos[1] - 48;
+        else
+            input->playertwo_y = tmp_pos[1] - 48;
+    }
+}
+
 void translate_input(char *tmp_pos, input_t *input, map_t *maps)
 {
-    for (int i = 0; tmp_pos[i] != 0; i++) {
-        if (tmp_pos[0] > 64 && tmp_pos[0] < 73) {
-            if (maps->player == 1)
-                input->playerone_x = tmp_pos[0] - 64;
-            else
-                input->playertwo_x = tmp_pos[0] - 64;
-        }
-        if (tmp_pos[1] > 48 && tmp_pos[1] < 57) {
-            if (maps->player == 1)
-                input->playerone_y = tmp_pos[1] - 48;
-            else
-                input->playertwo_y = tmp_pos[1] - 48;
-        }
-    }
-    if (maps->player == 1)
+    for (int i = 0; tmp_pos[i] != 0; i++)
+        translate_input_condition(tmp_pos, input, maps);
+    if (maps->player == 1) {
         send_signal_one(input->playerone_x,
         input->playerone_y, input->playertwo_pid);
-    else
+    } else {
         send_signal_two(input->playertwo_x,
         input->playertwo_y, input->playerone_pid);
+    }
 }

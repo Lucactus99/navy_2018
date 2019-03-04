@@ -32,15 +32,6 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     return (0);
 }
 
-char **modify_map(char **map, int x, int y)
-{
-    if (counter == 3)
-        map[y + 1][x + x] = 'x';
-    else
-        map[y + 1][x + x] = 'o';
-    return (map);
-}
-
 int player_two_main(map_t *maps, input_t *input, char **av)
 {
     maps->player = 2;

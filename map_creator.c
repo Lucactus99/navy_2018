@@ -41,39 +41,21 @@ char **fill_maps(char **map)
     return (map);
 }
 
-char **add_dots(char **map)
+char **add_dots_j(char **map, int i)
 {
-    for (int i = 2; i < 10; i++) {
-        for (int j = 2; j < 17; j++) {
-            if (j % 2 != 0)
-                map[i][j] = ' ';
-            else
-                map[i][j] = '.';
-        }
+    for (int j = 2; j < 17; j++) {
+        if (j % 2 != 0)
+            map[i][j] = ' ';
+        else
+            map[i][j] = '.';
     }
-    map[10] = NULL;
     return (map);
 }
 
-void display_map(char **map)
+char **add_dots(char **map)
 {
-    for (int i = 0; map[i] != NULL; i++) {
-        my_putstr(map[i]);
-        my_putchar('\n');
-    }
-    my_putchar('\n');
-}
-
-void malloc_maps(map_t *maps)
-{
-    maps->playerone_map = malloc(sizeof(char *) * 11);
-    maps->playertwo_hidden_map = malloc(sizeof(char *) * 11);
-    maps->playertwo_map = malloc(sizeof(char *) * 11);
-    maps->playerone_hidden_map = malloc(sizeof(char *) * 11);
-    for (int i = 0; i < 11; i++) {
-        maps->playerone_map[i] = malloc(sizeof(char) * 22);
-        maps->playertwo_hidden_map[i] = malloc(sizeof(char) * 22);
-        maps->playertwo_map[i] = malloc(sizeof(char) * 22);
-        maps->playerone_hidden_map[i] = malloc(sizeof(char) * 22);
-    }
+    for (int i = 2; i < 10; i++)
+        map = add_dots_j(map, i);
+    map[10] = NULL;
+    return (map);
 }

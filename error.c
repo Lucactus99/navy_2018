@@ -39,18 +39,6 @@ int check_coords_on_line(char *coord_file)
     return (0);
 }
 
-int check_length_ship(char **map)
-{
-    for (int i = 0; i < 4; i++) {
-        if (map[i][2] == map[i][5]) {
-            if (map[i][3] != map[i][6] - i - 1)
-                return (1);
-        } else if (map[i][2] - 64 != map[i][5] - i - 65)
-            return (1);
-    }
-    return (0);
-}
-
 int check_number_of_line(char **coord_file, char *buffer)
 {
     char tmp = '2';
