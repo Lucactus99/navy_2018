@@ -16,7 +16,6 @@ int store_ship_coordinate(map_t *maps, char **av)
     char **coord_file;
     int x[2] = {0, 0};
     int y[2] = {0, 0};
-    int i = 0;
     int a = 0;
     int tmp = 0;
     int length = 0;
@@ -29,12 +28,12 @@ int store_ship_coordinate(map_t *maps, char **av)
     coord_file = malloc_2d_file(buffer);
     if (check_error_in_file(coord_file, buffer) == 1)
         return (1);
-    for (; buffer[i] != '\0'; i++) {
+    for (int i = 0; buffer[i] != '\0'; i++) {
         if (a == 0 && buffer[i] != ':')
-            length = buffer[i] - 48;
+            maps->boat_length = buffer[i] - 48;
         if (a == 1 && buffer[i + 1] != ':' && tmp == 0) {
-            x[0] = buffer[i] - 64;
-            y[0] = buffer[i + 1] - 48;
+            x_init[0] = buffer[i] - 64;
+            y_init[0] = buffer[i + 1] - 48;
             tmp++;
         }
         if (a == 2 && buffer[i + 1] != ':' && tmp == 1) {
@@ -51,6 +50,11 @@ int store_ship_coordinate(map_t *maps, char **av)
         }
     }
     return (0);
+}
+
+int put_ship_coord_struct(char *buffer, map_t *maps)
+{
+
 }
 
 char **malloc_2d_file(char *buffer)

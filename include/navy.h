@@ -16,6 +16,9 @@ typedef struct map {
     char **playerone_hidden_map;
     char **playertwo_hidden_map;
     int player;
+    int x_init[2];
+    int y_init[2];
+    int boat_length
 } map_t;
 
 typedef struct input {
