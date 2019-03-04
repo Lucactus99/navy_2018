@@ -19,6 +19,8 @@ SRC     =   main.c \
             src/my_getnbr.c \
             src/my_put_nbr.c \
             error.c \
+            player_signals.c \
+            stock_txt.c \
 
 
 OBJ     =       $(SRC:.c=.o)
