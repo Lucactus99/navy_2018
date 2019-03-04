@@ -22,7 +22,7 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     my_putchar('\n');
     my_putstr("waiting for enemy connection...\n\n");
     while (counter >= 0)
-        usleep(10);
+        usleep(100);
     input->playertwo_pid = counter * (-1);    
     while (1) {
         display_map(maps->playerone_map);
@@ -31,7 +31,7 @@ int player_one_main(map_t *maps, input_t *input, char **av)
         counter = 1;
         get_player_input(input, input->playertwo_pid, maps);
         counter = 1;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             usleep(1000);
             if (counter == 1)
                 i = 0;
@@ -49,14 +49,14 @@ int player_one_main(map_t *maps, input_t *input, char **av)
             modify_hidden_map(maps->playertwo_hidden_map, input->playerone_x, input->playerone_y);
         counter = 1;
         my_putstr("waiting for enemy's attack...\n");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             usleep(1000);
             if (counter == 1)
                 i = 0;
         }
         pos1 = counter - 1;
         counter = 1;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             usleep(1000);
             if (counter == 1)
                 i = 0;
@@ -82,10 +82,12 @@ int player_one_main(map_t *maps, input_t *input, char **av)
 
 char **modify_hidden_map(char **map, int x, int y)
 {
+    printf("%d\n", x + x);
     if (counter == 3)
         map[y + 1][x + x] = 'x';
     else
         map[y + 1][x + x] = 'o';
+    printf("ok\n");
     return (map);
 }
 
@@ -104,21 +106,21 @@ int player_two_main(map_t *maps, input_t *input, char **av)
     input->playerone_pid = my_getnbr(av[1]);
     kill(input->playerone_pid, SIGUSR2);
     while (counter >= 0)
-        usleep(10);
+        usleep(100);
     while (1) {
         display_map(maps->playertwo_map);
         my_putstr("enemy's positions:\n");
         display_map(maps->playerone_hidden_map);
         counter = 1;
         my_putstr("waiting for enemy's attack...\n");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             usleep(1000);
             if (counter == 1)
                 i = 0;
         }
         pos1 = counter - 1;
         counter = 1;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             usleep(1000);
             if (counter == 1)
                 i = 0;
@@ -140,7 +142,7 @@ int player_two_main(map_t *maps, input_t *input, char **av)
         maps->playertwo_map = modify_hidden_map(maps->playertwo_map, pos1, pos2);
         get_player_input(input, input->playerone_pid, maps);
         counter = 1;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             usleep(1000);
             if (counter == 1)
                 i = 0;
