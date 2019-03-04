@@ -31,7 +31,7 @@ void receive_signal(int sig, siginfo_t *siginfo, void *context)
     }
 }
 
-void init_sig()
+void init_sig(void)
 {
     struct sigaction act;
 

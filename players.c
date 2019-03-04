@@ -31,25 +31,25 @@ void check_wait(int pos1, int pos2, map_t *maps, input_t *input)
     }
 }
 
+void my_sleep(void)
+{
+    counter = 1;
+    for (int i = 0; i < 100; i++) {
+        usleep(1000);
+        if (counter == 1)
+            i = 0;
+    }
+}
+
 void player_wait(map_t *maps, input_t *input)
 {
     int pos1 = 0;
     int pos2 = 0;
 
-    counter = 1;
     my_putstr("waiting for enemy's attack...\n");
-    for (int i = 0; i < 100; i++) {
-        usleep(1000);
-        if (counter == 1)
-            i = 0;
-    }
+    my_sleep();
     pos1 = counter - 1;
-    counter = 1;
-    for (int i = 0; i < 100; i++) {
-        usleep(1000);
-        if (counter == 1)
-            i = 0;
-    }
+    my_sleep();
     pos2 = counter - 1;
     check_wait(pos1, pos2, maps, input);
     if (maps->player == 1)
