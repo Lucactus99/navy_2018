@@ -18,7 +18,7 @@ typedef struct map {
     int player;
     int x_init[2];
     int y_init[2];
-    int boat_length
+    int boat_length;
 } map_t;
 
 typedef struct input {
@@ -41,9 +41,9 @@ void get_player_input(input_t *, int, map_t *);
 char *get_next_line(int);
 int check_errors(char *);
 void translate_input(char *, input_t *, int , map_t *);
-void modify_map_with_ships(int x[], int y[], int, map_t *);
-void horizontal_fill(int x[], int y[], int, map_t *);
-void vertical_fill(int x[], int y[], int, map_t *);
+void modify_map_with_ships(map_t *);
+void horizontal_fill(map_t *);
+void vertical_fill(map_t *);
 int store_ship_coordinate(map_t *, char **);
 int player_one_main(map_t *, input_t *, char **);
 int player_two_main(map_t *, input_t *, char **);
@@ -57,5 +57,8 @@ void send_hit_signal(int, int);
 void send_miss_signal(int, int);
 int check_receive_input(int, int, map_t *);
 int check_length_ship(char **);
+int put_ship_coord_struct(char *, map_t *);
+int stock_first_pos(int, map_t *, int, char *);
+int stock_second_pos(int, map_t *, int, char *);
 
 #endif

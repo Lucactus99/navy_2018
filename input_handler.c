@@ -14,11 +14,6 @@ int store_ship_coordinate(map_t *maps, char **av)
     int fd;
     char *buffer = malloc(sizeof(char) * 34);
     char **coord_file;
-    int x[2] = {0, 0};
-    int y[2] = {0, 0};
-    int a = 0;
-    int tmp = 0;
-    int length = 0;
 
     if (maps->player == 2)
         fd = open(av[2], O_RDONLY);
@@ -28,33 +23,47 @@ int store_ship_coordinate(map_t *maps, char **av)
     coord_file = malloc_2d_file(buffer);
     if (check_error_in_file(coord_file, buffer) == 1)
         return (1);
-    for (int i = 0; buffer[i] != '\0'; i++) {
-        if (a == 0 && buffer[i] != ':')
-            maps->boat_length = buffer[i] - 48;
-        if (a == 1 && buffer[i + 1] != ':' && tmp == 0) {
-            x_init[0] = buffer[i] - 64;
-            y_init[0] = buffer[i + 1] - 48;
-            tmp++;
-        }
-        if (a == 2 && buffer[i + 1] != ':' && tmp == 1) {
-            x[1] = buffer[i] - 64;
-            y[1] = buffer[i + 1] - 48;
-            tmp++;
-        }
-        if (buffer[i] == ':')
-            a++;
-        if (buffer[i] == '\n' || buffer[i + 1] == 0) {
-            a = 0;
-            tmp = 0;
-            modify_map_with_ships(x, y, length, maps);
-        }
-    }
+    put_ship_coord_struct(buffer, maps);
     return (0);
 }
 
 int put_ship_coord_struct(char *buffer, map_t *maps)
 {
+    int a = 0;
+    int tmp = 0;
 
+    for (int i = 0; buffer[i] != '\0'; i++) {
+        if (a == 0 && buffer[i] != ':')
+            maps->boat_length = buffer[i] - 48;
+        if (a == 1 && buffer[i + 1] != ':' && tmp == 0)
+            tmp = stock_first_pos(tmp, maps, i, buffer);
+        if (a == 2 && buffer[i + 1] != ':' && tmp == 1)
+            tmp = stock_second_pos(tmp, maps, i, buffer);
+        if (buffer[i] == ':')
+            a++;
+        if (buffer[i] == '\n' || buffer[i + 1] == 0) {
+            a = 0;
+            tmp = 0;
+            modify_map_with_ships(maps);
+        }
+    }
+    return (0);
+}
+
+int stock_first_pos(int tmp, map_t *maps, int i, char *buffer)
+{
+    maps->x_init[0] = buffer[i] - 64;
+    maps->y_init[0] = buffer[i + 1] - 48;
+    tmp++;
+    return (tmp);
+}
+
+int stock_second_pos(int tmp, map_t *maps, int i, char *buffer)
+{
+    maps->x_init[1] = buffer[i] - 64;
+    maps->y_init[1] = buffer[i + 1] - 48;
+    tmp++;
+    return (tmp);
 }
 
 char **malloc_2d_file(char *buffer)
@@ -89,34 +98,34 @@ int count_lines_buffer(char *buffer)
     return (tmp);
 }
 
-void modify_map_with_ships(int x[], int y[], int length, map_t *maps)
+void modify_map_with_ships(map_t *maps)
 {
-    if (y[0] == y[1])
-        horizontal_fill(x, y, length, maps);
-    if (x[0] == x[1])
-        vertical_fill(x, y, length, maps);
+    if (maps->y_init[0] == maps->y_init[1])
+        horizontal_fill(maps);
+    if (maps->x_init[0] == maps->x_init[1])
+        vertical_fill(maps);
 }
 
-void horizontal_fill(int x[], int y[], int length, map_t *maps)
+void horizontal_fill(map_t *maps)
 {
-    int i = x[0] + x[0];
+    int i = maps->x_init[0] * 2;
 
-    for (int j = 0; j < length; j++) {
+    for (int j = 0; j < maps->boat_length; j++) {
         if (maps->player == 1)
-            maps->playerone_map[y[0] + 1][i] = length + 48;
+            maps->playerone_map[maps->y_init[0] + 1][i] = maps->boat_length + 48;
         else
-            maps->playertwo_map[y[0] + 1][i] = length + 48;
+            maps->playertwo_map[maps->y_init[0] + 1][i] = maps->boat_length + 48;
         i += 2;
     }
 }
 
-void vertical_fill(int x[], int y[], int length, map_t *maps)
+void vertical_fill(map_t *maps)
 {
-    for (int i = y[0] + 1; i <= y[1] + 1; i++) {
+    for (int i = maps->y_init[0] + 1; i <= maps->y_init[1] + 1; i++) {
         if (maps->player == 1)
-            maps->playerone_map[i][x[0] + x[1]] = length + 48;
+            maps->playerone_map[i][maps->x_init[0] + maps->x_init[1]] = maps->boat_length + 48;
         else
-            maps->playertwo_map[i][x[0] + x[1]] = length + 48;
+            maps->playertwo_map[i][maps->x_init[0] + maps->x_init[1]] = maps->boat_length + 48;
     }
 }
 
