@@ -19,10 +19,10 @@ void get_player_input(input_t *input, int pid, map_t *maps)
         my_putstr("wrong position\n");
         get_player_input(input, pid, maps);
     } else if (check_errors(tmp_pos) == 0)
-        translate_input(tmp_pos, input, pid, maps);
+        translate_input(tmp_pos, input, maps);
 }
 
-void send_signal_one(int x, int y, int pid, map_t *maps)
+void send_signal_one(int x, int y, int pid)
 {
     for (int i = 0; i < x; i++) {
         kill(pid, SIGUSR1);
@@ -35,7 +35,7 @@ void send_signal_one(int x, int y, int pid, map_t *maps)
     }
 }
 
-void send_signal_two(int x, int y, int pid, map_t *maps)
+void send_signal_two(int x, int y, int pid)
 {
     for (int i = 0; i < x; i++) {
         kill(pid, SIGUSR2);
@@ -48,7 +48,7 @@ void send_signal_two(int x, int y, int pid, map_t *maps)
     }
 }
 
-void translate_input(char *tmp_pos, input_t *input, int pid, map_t *maps)
+void translate_input(char *tmp_pos, input_t *input, map_t *maps)
 {
     for (int i = 0; tmp_pos[i] != 0; i++) {
         if (tmp_pos[0] > 64 && tmp_pos[0] < 73) {
@@ -66,8 +66,8 @@ void translate_input(char *tmp_pos, input_t *input, int pid, map_t *maps)
     }
     if (maps->player == 1)
         send_signal_one(input->playerone_x,
-        input->playerone_y, input->playertwo_pid, maps);
+        input->playerone_y, input->playertwo_pid);
     else
         send_signal_two(input->playertwo_x,
-        input->playertwo_y, input->playerone_pid, maps);
+        input->playertwo_y, input->playerone_pid);
 }

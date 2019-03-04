@@ -40,7 +40,7 @@ char **add_dots(char **);
 void get_player_input(input_t *, int, map_t *);
 char *get_next_line(int);
 int check_errors(char *);
-void translate_input(char *, input_t *, int , map_t *);
+void translate_input(char *, input_t *, map_t *);
 void modify_map_with_ships(map_t *);
 void horizontal_fill(map_t *);
 void vertical_fill(map_t *);
@@ -60,5 +60,7 @@ int check_length_ship(char **);
 int put_ship_coord_struct(char *, map_t *);
 int stock_first_pos(int, map_t *, int, char *);
 int stock_second_pos(int, map_t *, int, char *);
+void player_wait(map_t *, input_t *);
+void player_attack(map_t *, input_t *);
 
 #endif

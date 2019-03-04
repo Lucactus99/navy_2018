@@ -53,7 +53,6 @@ int main(int ac, char **av)
 {
     map_t *maps = malloc(sizeof(map_t));
     input_t *input = malloc(sizeof(input_t));
-    int pid = 0;
 
     init_sig();
     if (ac < 2 || ac > 3)

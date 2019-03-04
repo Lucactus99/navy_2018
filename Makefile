@@ -13,6 +13,7 @@ SRC     =   main.c \
 			map_creator.c \
             input_handler.c \
             players.c \
+            players_useful.c \
             src/my_putstr.c \
             src/my_putchar.c \
             src/get_next_line.c \
