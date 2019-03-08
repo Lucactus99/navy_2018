@@ -13,8 +13,10 @@ char **modify_map(char **map, int x, int y)
 {
     if (counter == 3)
         map[y + 1][x + x] = 'x';
-    else
-        map[y + 1][x + x] = 'o';
+    else {
+        if (map[y + 1][x + x] != 'x')
+            map[y + 1][x + x] = 'o';
+    }
     return (map);
 }
 

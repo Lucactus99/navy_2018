@@ -82,10 +82,10 @@ int check_receive_input(int x, int y, map_t *maps)
     x = x + x;
     y = y + 1;
     if (maps->player == 1) {
-        if (maps->playerone_map[y][x] != '.')
+        if (maps->playerone_map[y][x] >= 50 && maps->playerone_map[y][x] <= 53)
             return (1);
     } else {
-        if (maps->playertwo_map[y][x] != '.')
+        if (maps->playertwo_map[y][x] >= 50 && maps->playertwo_map[y][x] <= 53)
             return (1);
     }
     return (0);
