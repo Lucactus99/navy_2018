@@ -42,7 +42,7 @@ void display_wait(int pos1, int pos2, map_t *maps, input_t *input)
     }
 }
 
-void player_wait(map_t *maps, input_t *input)
+int player_wait(map_t *maps, input_t *input)
 {
     int pos1 = 0;
     int pos2 = 0;
@@ -57,6 +57,11 @@ void player_wait(map_t *maps, input_t *input)
         maps->playerone_map = modify_map(maps->playerone_map, pos1, pos2);
     else
         maps->playertwo_map = modify_map(maps->playertwo_map, pos1, pos2);
+    if (!is_finished(maps->playerone_map))
+        return (2);
+    if (!is_finished(maps->playertwo_map))
+        return (1);
+    return (0);
 }
 
 void display_attack(map_t *maps, input_t *input)
@@ -82,7 +87,7 @@ void display_attack(map_t *maps, input_t *input)
     }
 }
 
-void player_attack(map_t *maps, input_t *input)
+int player_attack(map_t *maps, input_t *input)
 {
     if (maps->player == 1)
         get_player_input(input, input->playertwo_pid, maps);
@@ -97,4 +102,9 @@ void player_attack(map_t *maps, input_t *input)
         maps->playerone_hidden_map = modify_map(maps->playerone_hidden_map,
         input->playertwo_x, input->playertwo_y);
     }
+    if (!is_finished(maps->playerone_hidden_map))
+        return (1);
+    if (!is_finished(maps->playertwo_hidden_map))
+        return (2);
+    return (0);
 }

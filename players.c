@@ -10,6 +10,8 @@
 
 int player_one_main(map_t *maps, input_t *input, char **av)
 {
+    int value = 0;
+
     maps->player = 1;
     create_maps(maps);
     if (store_ship_coordinate(maps, av) == 1)
@@ -25,14 +27,20 @@ int player_one_main(map_t *maps, input_t *input, char **av)
         my_putstr("enemy's positions:\n");
         display_map(maps->playertwo_hidden_map);
         counter = 1;
-        player_attack(maps, input);
-        player_wait(maps, input);
+        value = player_attack(maps, input);
+        if (value > 0)
+            return (value);
+        value = player_wait(maps, input);
+        if (value > 0)
+            return (value);
     }
     return (0);
 }
 
 int player_two_main(map_t *maps, input_t *input, char **av)
 {
+    int value = 0;
+
     maps->player = 2;
     create_maps(maps);
     if (store_ship_coordinate(maps, av) == 1)
@@ -49,8 +57,12 @@ int player_two_main(map_t *maps, input_t *input, char **av)
         my_putstr("enemy's positions:\n");
         display_map(maps->playerone_hidden_map);
         counter = 1;
-        player_wait(maps, input);
-        player_attack(maps, input);
+        value = player_wait(maps, input);
+        if (value > 0)
+            return (value);
+        value = player_attack(maps, input);
+        if (value > 0)
+            return (value);
     }
     return (0);
 }

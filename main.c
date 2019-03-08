@@ -53,6 +53,7 @@ int main(int ac, char **av)
 {
     map_t *maps = malloc(sizeof(map_t));
     input_t *input = malloc(sizeof(input_t));
+    int value = 0;
 
     init_sig();
     if (ac < 2 || ac > 3)
@@ -62,11 +63,29 @@ int main(int ac, char **av)
             display_help();
             return (0);
         }
-        if (player_one_main(maps, input, av) == 84)
+        value = player_one_main(maps, input, av);
+        if (value == 84)
             return (84);
+        else if (value == 2) {
+            my_putstr("I won\n");
+            return (0);
+        }
+        else {
+            my_putstr("Enemy won\n");
+            return (1);
+        }
     } else if (ac == 3) {
-        if (player_two_main(maps, input, av) == 84)
+        value = player_two_main(maps, input, av);
+        if (value == 84)
             return (84);
+        else if (value == 2) {
+            my_putstr("I won\n");
+            return (0);
+        }
+        else {
+            my_putstr("Enemy won\n");
+            return (1);
+        }
     }
     return (0);
 }

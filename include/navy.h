@@ -60,7 +60,8 @@ int check_length_ship(char **);
 int put_ship_coord_struct(char *, map_t *);
 int stock_first_pos(int, map_t *, int, char *);
 int stock_second_pos(int, map_t *, int, char *);
-void player_wait(map_t *, input_t *);
-void player_attack(map_t *, input_t *);
+int player_wait(map_t *, input_t *);
+int player_attack(map_t *, input_t *);
+int is_finished(char **);
 
 #endif
