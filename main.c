@@ -67,10 +67,14 @@ int main(int ac, char **av)
         if (value == 84)
             return (84);
         else if (value == 2) {
+            display_map(maps->playerone_map);
+            display_map(maps->playertwo_hidden_map);
             my_putstr("I won\n");
             return (0);
         }
         else {
+            display_map(maps->playerone_map);
+            display_map(maps->playertwo_hidden_map);
             my_putstr("Enemy won\n");
             return (1);
         }
@@ -79,10 +83,14 @@ int main(int ac, char **av)
         if (value == 84)
             return (84);
         else if (value == 2) {
+            display_map(maps->playertwo_map);
+            display_map(maps->playerone_hidden_map);
             my_putstr("I won\n");
             return (0);
         }
         else {
+            display_map(maps->playertwo_map);
+            display_map(maps->playerone_hidden_map);
             my_putstr("Enemy won\n");
             return (1);
         }
