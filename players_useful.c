@@ -13,7 +13,7 @@ void my_sleep(void)
 {
     counter = 1;
     for (int i = 0; i < 100; i++) {
-        usleep(1000);
+        usleep(100);
         if (counter == 1)
             i = 0;
     }

@@ -18,8 +18,7 @@ int player_one_main(map_t *maps, input_t *input, char **av)
     my_put_nbr(getpid());
     my_putchar('\n');
     my_putstr("waiting for enemy connection...\n\n");
-    while (counter >= 0)
-        usleep(100);
+    while (counter >= 0);
     input->playertwo_pid = counter * (-1);
     while (1) {
         display_map(maps->playerone_map);
