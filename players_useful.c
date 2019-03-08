@@ -9,16 +9,6 @@
 #include "include/my.h"
 #include "include/navy.h"
 
-void my_sleep(void)
-{
-    counter = 1;
-    for (int i = 0; i < 100; i++) {
-        usleep(100);
-        if (counter == 1)
-            i = 0;
-    }
-}
-
 void display_wait(int pos1, int pos2, map_t *maps, input_t *input)
 {
     if (check_receive_input(pos1, pos2, maps)) {

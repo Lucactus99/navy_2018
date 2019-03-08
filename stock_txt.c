@@ -81,3 +81,13 @@ int count_lines_buffer(char *buffer)
     }
     return (tmp);
 }
+
+void my_sleep(void)
+{
+    counter = 1;
+    for (int i = 0; i < 100; i++) {
+        usleep(100);
+        if (counter == 1)
+            i = 0;
+    }
+}

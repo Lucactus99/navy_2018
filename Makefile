@@ -23,7 +23,8 @@ SRC     =   main.c \
             players_signal.c \
             map_modify.c \
             stock_txt.c \
-            end_game.c
+            end_game.c \
+            send_signal.c
 
 
 OBJ     =       $(SRC:.c=.o)

@@ -63,5 +63,7 @@ int stock_second_pos(int, map_t *, int, char *);
 int player_wait(map_t *, input_t *);
 int player_attack(map_t *, input_t *);
 int is_finished(char **);
+void my_sleep(void);
+int display_end(int, map_t *);
 
 #endif
