@@ -25,13 +25,11 @@ void get_player_input(input_t *input, int pid, map_t *maps)
 void send_signal_one(int x, int y, int pid)
 {
     for (int i = 0; i < x; i++) {
-        printf("=> %d\n", i);
         kill(pid, SIGUSR1);
         usleep(100);
     }
     usleep(125000);
     for (int i = 0; i < y; i++) {
-        printf("=> %d\n", i);
         kill(pid, SIGUSR1);
         usleep(100);
     }
@@ -40,13 +38,11 @@ void send_signal_one(int x, int y, int pid)
 void send_signal_two(int x, int y, int pid)
 {
     for (int i = 0; i < x; i++) {
-        printf("=> %d\n", i);
         kill(pid, SIGUSR2);
         usleep(100);
     }
     usleep(125000);
     for (int i = 0; i < y; i++) {
-        printf("=> %d\n", i);
         kill(pid, SIGUSR2);
         usleep(100);
     }

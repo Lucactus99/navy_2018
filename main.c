@@ -19,8 +19,6 @@ void receive_signal(int sig, siginfo_t *siginfo, void *context)
             counter = -1 * (siginfo->si_pid);
             kill(siginfo->si_pid, SIGUSR1);
         } else {
-            my_put_nbr(counter);
-            my_putchar('\n');
             counter++;
         }
     } else if (sig == SIGUSR1) {
@@ -28,8 +26,6 @@ void receive_signal(int sig, siginfo_t *siginfo, void *context)
             my_putstr("successfully connected\n\n");
             counter = -1;
         } else {
-            my_put_nbr(counter);
-            my_putchar('\n');
             counter++;
         }
     }
