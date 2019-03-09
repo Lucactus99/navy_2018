@@ -66,5 +66,7 @@ int main(int ac, char **av)
         value = player_one_main(maps, input, av);
     } else if (ac == 3)
         value = player_two_main(maps, input, av);
+    if (value == 84)
+        return (84);
     return (display_end(value, maps));
 }

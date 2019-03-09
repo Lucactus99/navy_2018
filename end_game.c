@@ -21,16 +21,24 @@ void display_end_player(map_t *maps)
 
 int display_end(int value, map_t *maps)
 {
-    if (value == 84)
-        return (84);
-    else if (value == 2) {
+    if (value == 2) {
         display_end_player(maps);
-        my_putstr("I won\n");
-        return (0);
+        if (maps->player == 2) {
+            my_putstr("I won\n");
+            return (0);
+        } else {
+            my_putstr("Enemy won\n");
+            return (1);
+        }
     } else {
         display_end_player(maps);
-        my_putstr("Enemy won\n");
-        return (1);
+        if (maps->player == 1) {
+            my_putstr("I won\n");
+            return (0);
+        } else {
+            my_putstr("Enemy won\n");
+            return (1);
+        }
     }
 }
 

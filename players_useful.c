@@ -93,8 +93,8 @@ int player_attack(map_t *maps, input_t *input)
         input->playertwo_x, input->playertwo_y);
     }
     if (!is_finished(maps->playerone_hidden_map))
-        return (1);
-    if (!is_finished(maps->playertwo_hidden_map))
         return (2);
+    if (!is_finished(maps->playertwo_hidden_map))
+        return (1);
     return (0);
 }
