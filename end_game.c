@@ -11,10 +11,14 @@
 void display_end_player(map_t *maps)
 {
     if (maps->player == 1) {
+        my_putstr("my positions:\n");
         display_map(maps->playerone_map);
+        my_putstr("enemy's positions:\n");
         display_map(maps->playertwo_hidden_map);
     } else {
+        my_putstr("my positions:\n");
         display_map(maps->playertwo_map);
+        my_putstr("enemy's positions:\n");
         display_map(maps->playerone_hidden_map);
     }
 }
