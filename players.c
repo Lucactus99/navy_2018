@@ -13,7 +13,6 @@ int player_one_loop(map_t *maps, input_t *input)
     int value = 0;
 
     while (1) {
-        my_putstr("my positions:\n");
         display_map(maps->playerone_map);
         my_putstr("enemy's positions:\n");
         display_map(maps->playertwo_hidden_map);
@@ -48,7 +47,6 @@ int player_two_loop(map_t *maps, input_t *input)
     int value = 0;
 
     while (1) {
-        my_putstr("my positions:\n");
         display_map(maps->playertwo_map);
         my_putstr("enemy's positions:\n");
         display_map(maps->playerone_hidden_map);
